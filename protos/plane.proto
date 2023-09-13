@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+message Plane {
+    int32 id = 1;
+    string name = 2;
+    int32 x = 3;
+    int32 y = 4;
+    int32 z = 5;
+}
+
+message PlaneNoId {
+    string name = 1;
+    int32 x = 2;
+    int32 y = 3;
+    int32 z = 4;
+}
+
+message Planes{
+    repeated Plane planes = 1;
+}
+
+message GetPlanesRequest{}
+
+message GetPlanesStreamRequest{}
+
+service PlaneService {
+    rpc CreatePlane (PlaneNoId) returns (Plane);
+    rpc GetPlanes (GetPlanesRequest) returns (Planes);
+    rpc StreamPlanes (GetPlanesStreamRequest) returns (stream Planes);
+}
